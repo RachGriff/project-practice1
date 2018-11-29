@@ -1,11 +1,14 @@
-import React from "react";
-import { View, Text, Button, TextInput, StyleSheet } from "react-native";
-import { DateTimePicker } from "react-native-modal-datetime-picker";
-import DateTimePickerTester from "./DatePicker";
+import React from 'react';
+import { View, Text, Button, TextInput, StyleSheet } from 'react-native';
+import { DateTimePicker } from 'react-native-modal-datetime-picker';
+import DateTimePickerTester from './DatePicker';
+import * as api from '../api';
 
 export default class PlanScreen extends React.Component {
   state = {
-    location: ""
+    location: '',
+    username: 'williamwalkers',
+    attractions: [],
   };
   render() {
     return (
@@ -21,9 +24,8 @@ export default class PlanScreen extends React.Component {
         <Button
           title="Map my day!"
           onPress={() => {
-            this.props.navigation.navigate("Itinerary", {
-              location: `${this.state.location}`
-            });
+            api.getAttractions(this.state.username, this.state.location).then(attractions => this.setState({attractions: attractions}));
+            this.props.navigation.navigate('Itinerary', {location: `${this.state.location}`, attractions: this.state.attractions});
           }}
         />
       </View>
@@ -33,16 +35,16 @@ export default class PlanScreen extends React.Component {
 const styles = StyleSheet.create({
   view: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "space-evenly"
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
   },
   textInput: {
-    backgroundColor: "#87cefa",
-    color: "black",
-    width: "50%",
-    height: 40
+    backgroundColor: '#87cefa',
+    color: 'black',
+    width: '50%',
+    height: 40,
   },
   date: {
-    color: "blue"
-  }
+    color: 'blue',
+  },
 });
