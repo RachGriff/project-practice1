@@ -11,6 +11,7 @@ export default class ItineraryScreen extends React.Component {
   };
 
   render() {
+    console.log(this.state.attractions)
     return this.state.placeName.map((place, index) => {
       return (
         <View>
@@ -27,5 +28,12 @@ export default class ItineraryScreen extends React.Component {
         </View>
       );
     });
+  }
+  componentDidMount = () => {
+    console.log('component mounting in progress')
+    console.log(this.props.navigation.state.params.location)
+    this.setState({
+      attractions: this.props.navigation.state.params.attractions
+    })
   }
 }
