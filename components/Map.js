@@ -102,8 +102,8 @@ export default class MapScreen extends React.Component {
             <MapView.Polyline
               key={index}
               coordinates={coords}
-              stroke={2}
-              strokeColor="red"
+              stroke={10}
+              strokeColor="purple"
             />
           );
         })}

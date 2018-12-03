@@ -1,15 +1,15 @@
-import React from "react";
-import { MapView } from "expo";
+import React from 'react';
+import { MapView } from 'expo';
 import {
   View,
   Text,
   StyleSheet,
   ScrollView,
   Image,
-  Button
-} from "react-native";
+  Button,
+} from 'react-native';
 // import Callout from "react-native-maps";
-import * as api from "../api";
+import * as api from '../api';
 
 const MapPins = props => {
   return props.attractions.map(attraction => {
@@ -18,7 +18,7 @@ const MapPins = props => {
         key={attraction.name}
         coordinate={{
           latitude: attraction.coordinates.latitude,
-          longitude: attraction.coordinates.longitude
+          longitude: attraction.coordinates.longitude,
         }}
       >
         <MapView.Callout
@@ -27,12 +27,12 @@ const MapPins = props => {
             props.getDirections(
               {
                 latitude: props.initialLocation.latitude,
-                longitude: props.initialLocation.longitude
+                longitude: props.initialLocation.longitude,
               },
               {
                 latitude: attraction.coordinates.latitude,
-                longitude: attraction.coordinates.longitude
-              }
+                longitude: attraction.coordinates.longitude,
+              },
             );
           }}
         >
@@ -43,7 +43,7 @@ const MapPins = props => {
                 style={Styles.placeImage}
                 source={{ uri: attraction.images[0].image }}
               />
-              <Button title={"take me there"} />
+              <Button title={'take me there'} />
               <Text>{attraction.intro}</Text>
             </ScrollView>
           </View>
@@ -56,15 +56,15 @@ const MapPins = props => {
 const Styles = StyleSheet.create({
   callout: {
     width: 120,
-    height: 200
+    height: 200,
   },
   placeImage: {
     width: 100,
-    height: 100
+    height: 100,
   },
   calloutHeader: {
     fontSize: 16,
-    fontWeight: "bold"
-  }
+    fontWeight: 'bold',
+  },
 });
 export default MapPins;
