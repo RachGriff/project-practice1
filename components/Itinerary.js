@@ -1,18 +1,19 @@
-import React from "react";
-import { View, Button, Text, Image } from "react-native";
-import _ from "lodash";
-import { Card } from "react-native-elements";
+import React from 'react';
+import { View, Button, Text, Image } from 'react-native';
+import _ from 'lodash';
+import { Card } from 'react-native-elements';
+import Nav from './Nav.js';
 
 export default class ItineraryScreen extends React.Component {
   state = {
-
     attractions: [],
-    randomAttractions: []
+    randomAttractions: [],
   };
 
   render() {
     return (
       <View>
+        <Nav openDrawer={this.props.navigation.openDrawer} />
         <Card>
           {this.state.randomAttractions.map((attraction, index) => {
             return (
@@ -29,21 +30,22 @@ export default class ItineraryScreen extends React.Component {
         <Button title="Randomize" />
         <Button
           title="Map locations"
-          onPress={() => this.props.navigation.navigate("Map", {
-            randomAttractions: this.state.randomAttractions
-          })}
+          onPress={() =>
+            this.props.navigation.navigate('Map', {
+              randomAttractions: this.state.randomAttractions,
+            })
+          }
         />
       </View>
     );
-
   }
   componentDidMount = () => {
-    console.log("log 1");
+    console.log('log 1');
     const locationsArray = this.props.navigation.state.params.attractions;
     const randomAttractions = _.shuffle(locationsArray).slice(0, 5);
     this.setState({
       attractions: locationsArray,
-      randomAttractions: randomAttractions
+      randomAttractions: randomAttractions,
     });
   };
 }

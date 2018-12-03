@@ -19,7 +19,6 @@ import HistoryScreen from './History';
 import SuggestionsScreen from './Suggestions';
 import ItineraryScreen from './Itinerary';
 import MapScreen from './Map.js';
-import Nav from './Nav.js';
 
 class HomeScreen extends React.Component {
   static navigationOptions = {

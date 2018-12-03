@@ -12,6 +12,7 @@ import {
 import { Constants, Location, Permissions } from 'expo';
 import MapPins from './MapPins.js';
 import { getDirections } from '../api';
+import Nav from './Nav.js';
 
 export default class MapScreen extends React.Component {
   state = {
@@ -80,35 +81,36 @@ export default class MapScreen extends React.Component {
     }
 
     return (
-      // <View style={{ paddingTop: 5 }}>
-      <MapView
-        style={{ flex: 1 }}
-        initialRegion={initialLocation}
-        showsUserLocation
-        followsUserLocation={true}
-        showsCompass={true}
-        onPress={this.cameraViewHandler}
-        ref={ref => (this.map = ref)}
-        maxZoomLevel={20}
-        showsMyLocationButton
-      >
-        <MapPins
-          initialLocation={initialLocation}
-          getDirections={this.generateDirections}
-          attractions={this.props.navigation.state.params.randomAttractions}
-        />
-        {this.state.coordsArray.map((coords, index) => {
-          return (
-            <MapView.Polyline
-              key={index}
-              coordinates={coords}
-              stroke={10}
-              strokeColor="purple"
-            />
-          );
-        })}
-      </MapView>
-      // </View>
+      <View>
+        <Nav openDrawer={this.props.navigation.openDrawer} />
+        <MapView
+          style={{ flex: 1 }}
+          initialRegion={initialLocation}
+          showsUserLocation
+          followsUserLocation={true}
+          showsCompass={true}
+          onPress={this.cameraViewHandler}
+          ref={ref => (this.map = ref)}
+          maxZoomLevel={20}
+          showsMyLocationButton
+        >
+          <MapPins
+            initialLocation={initialLocation}
+            getDirections={this.generateDirections}
+            attractions={this.props.navigation.state.params.randomAttractions}
+          />
+          {this.state.coordsArray.map((coords, index) => {
+            return (
+              <MapView.Polyline
+                key={index}
+                coordinates={coords}
+                stroke={10}
+                strokeColor="purple"
+              />
+            );
+          })}
+        </MapView>
+      </View>
     );
   }
 }
